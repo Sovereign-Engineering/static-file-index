@@ -1,24 +1,23 @@
-[tool.ruff.format]
-# Like Black, use double quotes for strings.
-quote-style = "single"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "apindex_Sovereign_Engineering"
+name = "apindex"
 version = "3.0.0"
 authors = [
-  { name="Eliah Lopez", email="elijahllopezz@gmail.com" },
+  { name="Elijah Lopez", email="elijahllopezz@gmail.com" },
   { name="Ognjen Galic", email="smclt30p@gmail.com" },
 ]
-description = "Create static FTP-like index.html files for each directory in a file structure"
+description = "Static HTML file index generator. This program enables you to generate FTP-like index.html files for static web servers such as Github Pages or mini HTTP servers"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
+    "Topic :: System :: Archiving :: Packaging",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Software Development :: Build Tools",
     "Operating System :: OS Independent",
 ]
 
@@ -26,11 +25,5 @@ classifiers = [
 Homepage = "https://github.com/Sovereign-Engineering/static-file-index/"
 Issues = "https://github.com/Sovereign-Engineering/static-file-index/issues"
 
-[tool.hatch.build.targets.wheel]
-bypass-selection = true
-
-[tool.hatch.build.targets.sdist]
-exclude = [
-  "debian",
-  "CMakeLists.txt",
-]
+[project.scripts]
+apindex = "apindex:main"

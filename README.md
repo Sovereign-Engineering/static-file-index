@@ -12,20 +12,9 @@ The file icons are also embedded into the `index.html` file so there is no need 
 
 ## Installation
 
-```sh
-git clone https://github.com/Sovereign-Engineering/static-file-index
-cd static-file-index
-# git reset --hard SHA1
-cmake . -DCMAKE_INSTALL_PREFIX=/usr
-sudo make install
-```
+`pip install git+https://github.com/Sovereign-Engineering/static-file-index`
 
-### Demo
-
-The FTP archive of thinkpads.org is hosted on Github Pages and its generated with apindex.
-Check it out: https://thinkpads.org/ftp/
-
-### How do I use it?
+### Usage
 
 Just run:
 
@@ -52,4 +41,8 @@ This renders __Index of /__.
 
 ### How do I add/remove icons?
 
-See `share/icons.xml` and the files under `share/img/*`.
+See `src/apindex/resources/icons.xml` and the files under `src/apindex/images/*`.
+
+## Building Distributions
+
+Follow [packaging.python.org](https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives)
