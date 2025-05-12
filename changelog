@@ -1,3 +1,8 @@
+apindex (3.0.0)
+
+  * Support pip installation
+  * Removed CMAKE and Debian packaging
+
 apindex (2.2-1) unstable; urgency=medium
 
   * Fix footer program name and link

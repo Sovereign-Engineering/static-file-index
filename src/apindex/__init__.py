@@ -26,20 +26,16 @@
 
 import argparse
 import base64
-from contextlib import suppress
 from pathlib import Path
 import math
 import os
 import os.path
-import sys
 import time
 from xml.dom.minidom import parseString
 
 
-VERSION = '@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@'
-PREFIX = '@CMAKE_INSTALL_PREFIX@'
-if PREFIX.startswith('@'):
-    PREFIX = '.'
+import importlib.resources
+VERSION = '3.0.0'
 
 
 class Icon:
@@ -51,11 +47,11 @@ class Icon:
 class ResourceManager:
     @staticmethod
     def getFile(fileName):
-        return PREFIX + '/share/apindex/' + fileName
+        return str(importlib.resources.files('apindex') / 'resources' / fileName)
 
     @staticmethod
     def readFile(fileName):
-        with open(ResourceManager.getFile(fileName), 'r') as file:
+        with importlib.resources.files('apindex').joinpath('resources', fileName).open('r') as file:
             return file.read()
 
     @staticmethod
@@ -65,7 +61,7 @@ class ResourceManager:
 
     @staticmethod
     def readFileBase64(fileName):
-        with open(ResourceManager.getFile(fileName), 'rb') as file:
+        with importlib.resources.files('apindex').joinpath('resources', fileName).open('rb') as file:
             data = file.read()
         return base64.b64encode(data).decode('ascii')
 
@@ -84,9 +80,9 @@ class ResourceManager:
 class File:
     STATIC_FILE_HTML = ResourceManager.readFile('file.template.html')
 
-    FILE_ICON = ResourceManager.readFileBase64('img/file.png')
-    FOLDER_ICON = ResourceManager.readFileBase64('img/folder.png')
-    BACK_ICON = ResourceManager.readFileBase64('img/back.png')
+    FILE_ICON = ResourceManager.readFileBase64('images/file.png')
+    FOLDER_ICON = ResourceManager.readFileBase64('images/folder.png')
+    BACK_ICON = ResourceManager.readFileBase64('images/back.png')
 
     ICONS = ResourceManager.parseIconsDescription()
 
@@ -100,7 +96,7 @@ class File:
         for icon in self.ICONS:
             for ex in icon.extensions:
                 if self.filename.endswith(ex):
-                    return ResourceManager.readFileBase64('img/' + icon.file)
+                    return ResourceManager.readFileBase64('images/' + icon.file)
 
         return self.FILE_ICON
 
